@@ -8,8 +8,16 @@ const DialogItem = (props) => {
     <div className={s.dialog + " " + s.active}>
     <NavLink to={path}> {props.name} </NavLink>
   </div>
-  )
-}
+  );
+};
+
+const Message = (props) => {
+  return (
+    <div className={s.dialog}>
+     {props.message}
+    </div>
+  );
+};
 
 const Dialogs = (props) => {
   return (
@@ -24,9 +32,9 @@ const Dialogs = (props) => {
       </div>
 
       <div className={s.messages}>
-        <div className={s.dialog}>Hi</div>
-        <div className={s.dialog}>How are you?</div>
-        <div className={s.dialog}>Yo</div>
+        <Message message = "hi"/>
+        <Message message = "How are you?"/>
+        <Message message = "Yo"/>
       </div>
     </div>
   );
