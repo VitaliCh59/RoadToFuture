@@ -1,10 +1,10 @@
 .dialogs {
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 3fr 5fr;
 }
 
 .dialogsItems {
-  padding: 10px;
+  padding: 30px;
 }
 
 a.activeLink {
@@ -12,6 +12,10 @@ a.activeLink {
 }
 
 .messages {
-  padding: 10px;
+  padding: 30px;
 }
 
+.dialogItem img {
+  width: 90px;
+  border-radius: 30px;
+}
