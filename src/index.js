@@ -7,7 +7,6 @@ import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
 
-let rerenderEntireTree = () => {
 
     ReactDOM.render(
         <React.StrictMode>
@@ -15,14 +14,12 @@ let rerenderEntireTree = () => {
                 <App />
             </Provider>
         </React.StrictMode>,
-        document.getElementById('root')
-    );
-};
-rerenderEntireTree();
+        document.getElementById('root'));
 
-store.subscribe(() => {
-    rerenderEntireTree();
-});
+
+/*store.subscribe(() => {
+    rerenderEntireTree(); убрали, потому что в DialogContainere теперь есть connect и не нужно перерисовывать все дерево. Оно перерисовывается локально
+});*/
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
