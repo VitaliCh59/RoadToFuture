@@ -54,20 +54,23 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case SEND_MESSAGE: {
+        case UPDATE_NEW_MESSAGE_BODY:
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
+
+
+        case SEND_MESSAGE:
             let body = state.newMessageBody;
-            let stateCopy = {...state};
-            stateCopy.newMessageBody = '';
-            stateCopy.messagesData = [...state.messagesData];
-            stateCopy.messagesData.push({id: 7, message: body});
-            return stateCopy;
-        }
-        case UPDATE_NEW_MESSAGE_BODY: {
-            let stateCopy = {...state};
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
-        }
+            return {
+                ...state,
+                newMessageBody: '',
+                messagesData: [...state.messagesData, {id: 7, message: body}]  // создаем новый массив, в левую часть закидываем элементы из старого массива, затем добавляем в конец новый элемент через запятую
+            };
+
         default:
             return state;
     }
