@@ -1,10 +1,17 @@
 import React from "react";
 import styles from './users.module.css'
+import * as axios from "axios";
+import userPhoto from '../../assets/images/img1.jpg'
 
 let Users = (props) => {
 
     if (props.users.length === 0 ) {
-        props.setUsers([
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users' ).then(responce => {
+        props.setUsers(responce.data.items);
+        });
+
+        /*props.setUsers([
                 {
                     id: 1,
                     followed: false,
@@ -30,7 +37,7 @@ let Users = (props) => {
                     photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS2MCg0O0m8O0kP_3Cfz4TAB-0B-uC86GcjNw&usqp=CAU'
                 },
             ]
-        )
+        )*/
     }
 
     return <div>
@@ -38,7 +45,7 @@ let Users = (props) => {
             props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
-                        <img src={user.photoUrl} className={styles.usersPhoto}/>
+                        <img src={user.photos.small != null ? user.photos.small : userPhoto} className={styles.usersPhoto}/>
                     </div>
                     <div>
                         {user.followed
@@ -49,12 +56,12 @@ let Users = (props) => {
 
                 <span>
                     <span>
-                        <div>{user.fullName}</div>
+                        <div>{user.name}</div>
                         <div>{user.status}</div>
                     </span>
                     <span>
-                        <div>{user.location.country}</div>
-                        <div>{user.location.city}</div>
+                        <div>{'user.location.country'}</div>
+                        <div>{'user.location.city'}</div>
                     </span>
                 </span>
             </div>)
