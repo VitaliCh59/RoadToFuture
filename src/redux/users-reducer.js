@@ -3,9 +3,14 @@ import React from "react";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 
 let initialState = {
     users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1,
     newPostText: 'it-kamasutra.com'
 };
 
@@ -38,8 +43,15 @@ const userReducer = (state = initialState, action) => {
             }
 
         case SET_USERS: {
-            return { ...state, users: [...state.users, ...action.users]}
+            return { ...state, users: action.users}
         } // перезатираем старых пользователей новыми с сервера
+
+        case  SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
+        }
 
         default:
             return state;
@@ -66,5 +78,10 @@ export const setUsersAC = (users) => {
         users
     }
 }
+// ниже те же самые АС, только в одну строку
+export const setCurrentPageAC = (currentPage) => ({type:SET_CURRENT_PAGE, currentPage})
+
+export const setTotalUsersCountAC = (totalUsersCount) => ({type:SET_TOTAL_USERS_COUNT, totalUsersCount})
+
 
 export default userReducer;
