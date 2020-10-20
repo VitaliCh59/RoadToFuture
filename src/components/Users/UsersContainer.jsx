@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-    followAC,
-    setCurrentPageAC,
-    setToggleIsFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setToggleIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
 } from '../../redux/users-reducer';
 import * as axios from 'axios';
 import Users from './Users';
@@ -61,7 +61,7 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-// передает дочерние презентац компоненте через пропсы коллбэки, которые она может вызывать
+/*// передает дочерние презентац компоненте через пропсы коллбэки, которые она может вызывать
 let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
@@ -83,6 +83,8 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(setToggleIsFetchingAC (isFetching));
         }
     }
-}
+}*/
 
-export default connect(mapStateToProps, mapDispatchToProps) (UsersContainer);
+
+//сократили запись вызова в 58 уроке
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggleIsFetching}) (UsersContainer);
