@@ -5,13 +5,15 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const TOGGLE_IS_FETCHING ="TOGGLE_IS_FETCHING"
 
 let initialState = {
     users: [],
-    pageSize: 10,
+    pageSize: 50,
     totalUsersCount: 0,
     currentPage: 1,
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    isFetching: true
 };
 
 // reducer - чистая функция, которая принимает старый стэйт, экшон, если нужно,
@@ -51,6 +53,8 @@ const userReducer = (state = initialState, action) => {
         }
         case SET_TOTAL_USERS_COUNT: {
             return {...state, totalUsersCount: action.totalUsersCount}
+        } case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
         }
 
         default:
@@ -82,6 +86,8 @@ export const setUsersAC = (users) => {
 export const setCurrentPageAC = (currentPage) => ({type:SET_CURRENT_PAGE, currentPage})
 
 export const setTotalUsersCountAC = (totalUsersCount) => ({type:SET_TOTAL_USERS_COUNT, totalUsersCount})
+
+export const setToggleIsFetchingAC = (isFetching) => ({type:TOGGLE_IS_FETCHING, isFetching})
 
 
 export default userReducer;
