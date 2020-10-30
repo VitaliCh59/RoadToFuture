@@ -1,4 +1,6 @@
 import React from "react";
+import {userAPI} from "../api/api";
+import {toggleFollowingProgress} from "./users-reducer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -56,8 +58,17 @@ export const updateNewPostTextActionCreator = (text) => {
         newText: text
     }
 }
+export const setUserProfile = (profile) => ({type:SET_USER_PROFILE, profile})
 // экшн креатор возвращает нам объект(экшон) в котором инкапсулированы все данные,
 // чтоб редьюсор получил экшон и применил изменения на стэйт
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+
+//thunk
+export const getUserProfile = (userId) => (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        userAPI.getProfile(userId).then(responce => {
+                dispatch(setUserProfile(responce.data));
+            })
+    }
+
 
 export default profileReducer;
