@@ -11,6 +11,7 @@ import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
 import {userAPI} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component{
 
@@ -64,10 +65,11 @@ let mapStateToProps = (state) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
+/*
 
 let withRedirect = withAuthRedirect(UsersContainer)
 
-/*// передает дочерние презентац компоненте через пропсы коллбэки, которые она может вызывать
+/!*!// передает дочерние презентац компоненте через пропсы коллбэки, которые она может вызывать
 let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
@@ -89,8 +91,15 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(setToggleIsFetchingAC (isFetching));
         }
     }
-}*/
+}*!/
 
 
 //сократили запись вызова в 58 уроке
 export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}) (withRedirect);
+*/
+
+// обернули в ф-ю компоус в 70ур.
+export default compose (
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}),
+    withAuthRedirect
+)(UsersContainer)
