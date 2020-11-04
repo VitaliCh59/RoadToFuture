@@ -11,6 +11,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 /*route следит за урлом в браузере, и при совпадении вызывыет render*/
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/news" render={() => <News />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <Settings />} />
+          <Route path="/login" render={() => <LoginPage />} />
           {/* <Route path="/friends" render={() => <Friends state={props.state.sitebar}/>} /> */}
 
         </div>

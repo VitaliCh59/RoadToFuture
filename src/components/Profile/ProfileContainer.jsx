@@ -2,7 +2,8 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 class ProfileContainer extends React.Component {
@@ -16,17 +17,21 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+
         return (
            <Profile {...this.props} profile ={this.props.profile} />
            );
     };
 }
 
-// Когда ф-ия возвращает объект -ставим круглые скобки, иначе мы получим тело стрелочной ф-ии
-let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile})
+//  с помощью HOC создаем новую контейнерную комп. для выноса редиректа из компоненты
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+let mapStateToProps = (state) => ({
+    profile: state.profilePage.profile
+})
+
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 // виз роутер отрисовывает новую компоненту как коннект, но добавляет данные из урла+стора
 
 

@@ -10,6 +10,7 @@ import * as axios from 'axios';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
 import {userAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component{
 
@@ -63,6 +64,9 @@ let mapStateToProps = (state) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
+
+let withRedirect = withAuthRedirect(UsersContainer)
+
 /*// передает дочерние презентац компоненте через пропсы коллбэки, которые она может вызывать
 let mapDispatchToProps = (dispatch) => {
     return {
@@ -89,4 +93,4 @@ let mapDispatchToProps = (dispatch) => {
 
 
 //сократили запись вызова в 58 уроке
-export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}) (UsersContainer);
+export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}) (withRedirect);
