@@ -45,6 +45,6 @@ export default  connect (mapStateToProps, {getUserProfile}) (WithUrlDataContaine
 // всё, что выше обернём в функцию компоус
 export default compose (
     connect (mapStateToProps, {getUserProfile}),
-    withRouter,
-    withAuthRedirect
+    withRouter
+    //withAuthRedirect
 )(ProfileContainer);
