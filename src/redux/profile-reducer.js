@@ -7,6 +7,7 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
+
 let initialState = {
     postData: [
         {id: 1, message: 'Hi, how are you?', likeCounts: 12},
@@ -45,7 +46,8 @@ const profileReducer = (state = initialState, action) => {
             return  {
                 ...state,
                 status: action.status
-            }
+            };
+
 
         default:
             return state;

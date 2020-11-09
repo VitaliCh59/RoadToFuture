@@ -2,7 +2,7 @@ import React from "react";
 import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "SET_USER_DATA";
-
+const LOGIN = "LOGIN"
 
 let initialState = {
     userId: null,
@@ -22,7 +22,12 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                ...action.data,
                 isAuth: true
-            }
+            };
+       /* case LOGIN:
+            return {
+                ...state,
+                login: action.
+            }*/
 
         default:
             return state;
