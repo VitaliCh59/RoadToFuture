@@ -1,7 +1,6 @@
 import React from "react";
 
 const SEND_MESSAGE = "SEND-MESSAGE";
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
 
 let initialState = {
     dialogsData: [
@@ -49,25 +48,16 @@ let initialState = {
         {id: 4, message: 'are'},
         {id: 5, message: 'you'},
         {id: 6, message: 'doing'}
-    ],
-    newMessageBody: ''
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
-
-
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messagesData: [...state.messagesData, {id: 7, message: body}]  // создаем новый массив, в левую часть закидываем элементы из старого массива, затем добавляем в конец новый элемент через запятую
             };
 
@@ -76,17 +66,12 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageCreator = () => {
+export const sendMessageCreator = (newMessageBody) => {
     return {
-        type: SEND_MESSAGE
+        type: SEND_MESSAGE,
+        newMessageBody
     }
 }
 
-export const updateNewMessageBodyCreator = (body) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    }
-}
 
 export default dialogsReducer;
