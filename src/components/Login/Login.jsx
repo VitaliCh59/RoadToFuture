@@ -1,18 +1,24 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
+import {Input, Textarea} from "../common/FromsControl/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+
+const maxLength20 = maxLengthCreator(20)
 
 const LoginForm = (props) => {
     return (
         // хандл сабмит, чтоб не перезагружать форму при нажатии на клавишу
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"Login"} name={"login"} component={"input"}/>
+                <Field placeholder={"Login"} name={"login"} component={Input}
+                       validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                <Field placeholder={"Password"} name={"password"} component={Input}
+                       validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field type="checkbox" name={"rememberMe"} component={"input"}/> remember me
+                <Field type="checkbox" name={"rememberMe"} component={Input}/> remember me
             </div>
             <div>
                 <button>Login</button>
