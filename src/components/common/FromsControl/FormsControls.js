@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./FormControls.module.css"
 
-// все пропсы приходящие в екстареу мы отдаем конечному пользователю, т.е Текстэрии, которая где то вызывается
+// все пропсы приходящие в текстареу мы отдаем конечному пользователю, т.е Текстэрии, которая где то вызывается
 // Textarea =({input, meta - мы это достаем деструктуризацией (рест оператор),
 // а все оставшееся оставим в пропсах, и будем прокилывать именно оставшееся
 export const Element = Element=> ({input, meta, ...props}) => {
@@ -13,7 +13,7 @@ export const Element = Element=> ({input, meta, ...props}) => {
             </div>
             { hasError && <span> {meta.error} </span>}
         </div>
-    )
+    )//если ошибка есть, покажи спан
 }
 
 export const Textarea = Element("textarea");
