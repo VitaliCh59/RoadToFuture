@@ -6,10 +6,8 @@ import {
     toggleFollowingProgress,
     unfollow
 } from '../../redux/users-reducer';
-import * as axios from 'axios';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
-import {userAPI} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -101,5 +99,5 @@ export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggl
 // обернули в ф-ю компоус в 70ур.
 export default compose (
     connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}),
-    withAuthRedirect
+   // withAuthRedirect
 )(UsersContainer)
