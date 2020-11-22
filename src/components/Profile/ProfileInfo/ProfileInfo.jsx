@@ -2,6 +2,7 @@ import React from "react";
 import y from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus"
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile /*props.profile == null || props.profile  Звучит, как если у нас нет профайла*/) {
@@ -17,7 +18,7 @@ const ProfileInfo = (props) => {
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR_6UP6TWFDTFZvLjcy6Rq8xnN130gpslTjww&usqp=CAU"></img>
       </div>
       <div className={y.descriptionBlock}>
-          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
           <img src = {props.profile.photos.large}/>
 
       </div>
