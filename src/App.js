@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { BrowserRouter, Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -26,7 +26,7 @@ class App extends React.Component {
       return <Preloader/>
     }
     return (
-        <BrowserRouter>
+
           <div className='app-wrapper'>
             <HeaderContainer/>
             <Navbar/>
@@ -41,7 +41,7 @@ class App extends React.Component {
               {/* <Route path="/friends" render={() => <Friends state={props.state.sitebar}/>} /> */}
             </div>
           </div>
-        </BrowserRouter>
+
     );
   }
 }

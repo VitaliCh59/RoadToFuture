@@ -5,6 +5,7 @@ import {toggleFollowingProgress} from "./users-reducer";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const DELETE_POST = "DELETE_POST"
 
 
 let initialState = {
@@ -27,22 +28,25 @@ const profileReducer = (state = initialState, action) => {
                 likeCounts: 0
             };
             return {
-            ...state,
-            postData: [...state.postData, newPost],
-            newPostText:  ''
-        };
+                ...state,
+                postData: [...state.postData, newPost],
+                newPostText: ''
+            };
         case SET_USER_PROFILE:
             return {
                 ...state,
                 profile: action.profile
             };
         case SET_STATUS:
-            return  {
+            return {
                 ...state,
                 status: action.status
             };
-
-
+        case DELETE_POST:
+            return {
+                ...state,
+                postsData: state.postData.filter(post => post.id != action.postId)
+            };
         default:
             return state;
     }
@@ -55,34 +59,31 @@ export const addPostActionCreator = (newPostText) => {
     }
 }
 
-export const setUserProfile = (profile) => ({type:SET_USER_PROFILE, profile})
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 // экшн креатор возвращает нам объект(экшон) в котором инкапсулированы все данные,
 // чтоб редьюсор получил экшон и применил изменения на стэйт
 
-export const setStatus = (status) => ({type:SET_STATUS, status})
+export const setStatus = (status) => ({type: SET_STATUS, status})
+
+export const deletePost = (postId) => ({type: DELETE_POST, postId})
 
 //thunk
-export const getUserProfile = (userId) => (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId));
-        userAPI.getProfile(userId).then(response => {
-                dispatch(setUserProfile(response.data));
-            })
-    }
-
-export const getStatus = (userId) => (dispatch) => {
-        profileAPI.getStatus(userId).then(response => {
-                dispatch(setStatus(response.data));
-            })
-    }
-
-export const updateStatus = (status) => (dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
-    });
+export const getUserProfile = (userId) => async (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    let response = await userAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data));
 }
 
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
+}
+
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
+}
 
 export default profileReducer;
