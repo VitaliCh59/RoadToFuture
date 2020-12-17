@@ -1,6 +1,7 @@
+.descriptionBlock {
+    padding: 10px;
+}
 
-/* .content {
-    grid-area: c;
-    background-color: rgb(196, 226, 62);
-  }
-   */
+.mainPhoto{
+    max-width: 200px;
+}
