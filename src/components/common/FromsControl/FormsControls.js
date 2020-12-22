@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./FormControls.module.css"
+import {Field} from "redux-form";
 
 // все пропсы приходящие в текстареу мы отдаем конечному пользователю, т.е Текстэрии, которая где то вызывается
 // Textarea =({input, meta - мы это достаем деструктуризацией (рест оператор),
@@ -25,6 +26,15 @@ export const Input = (props) => {
     return <FormControl {...props}><input {...input} {...restProps} /> </FormControl>
 }
 
+export const createField = (placeholder, name, validators, component, props ={}, text = "") => (
+    <div>
+        <Field placeholder={placeholder} name={name}
+               validate={validators}
+               component={component}
+            {...props}
+            /> {text}
+    </div>
+)
 
 /*export const Textarea = ({input, meta, ...props}) => {
     const hasError = meta.error && meta.touched;

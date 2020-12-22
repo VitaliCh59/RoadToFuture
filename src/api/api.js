@@ -48,6 +48,9 @@ export const profileAPI = {
             }
         })
     },
+    saveProfile(profile) {
+        return instance.put(`profile`, profile)
+    }
 }
 //объект, который хранит методы заппроса, Связанные с авторизацией
 export const authAPI = {
