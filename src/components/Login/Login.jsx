@@ -9,7 +9,7 @@ import style from "../../components/common/FromsControl/FormControls.module.css"
 
 const maxLength20 = maxLengthCreator(20)
 
-const LoginForm = ({handleSubmit, error }) => {
+const LoginForm = ({handleSubmit, error, captchaUrl }) => {
     return (
         // хандл сабмит, чтоб не перезагружать форму при нажатии на клавишу
         <form onSubmit={handleSubmit}>
@@ -24,6 +24,13 @@ const LoginForm = ({handleSubmit, error }) => {
             <div>
                 <Field type="checkbox" name={"rememberMe"} component={Input}/> remember me
             </div>
+
+            {captchaUrl && <img src={captchaUrl} />}
+            {captchaUrl &&
+            <div>
+                <Field placeholder={"Symbols from captcha"} name={"captcha"} component={Input} validate={[required]}/>
+            </div>}
+
             {error && <div className={style.formSummaryError}>
                 {error}
             </div>}
@@ -38,9 +45,9 @@ const LoginReduxForm = reduxForm({
     form:'login'
 }) (LoginForm)
 
-const Login = ({login, isAuth }) => {
+const Login = ({login, isAuth, captchaUrl}) => {
     const onSubmit = (formData) => {
-        login (formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
     if (isAuth) {
         return <Redirect to = {"/profile"} />
@@ -48,11 +55,12 @@ const Login = ({login, isAuth }) => {
 
         return <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
         </div>
     }
 
 const mapStateToProps = (state) => ({
+    captchaUrl: state.auth.captchaUrl,
     isAuth: state.auth.isAuth
 })
 
